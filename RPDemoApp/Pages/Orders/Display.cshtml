@@ -1,0 +1,61 @@
+﻿@page
+@model RPDemoApp.Pages.Orders.DisplayModel
+@{
+    ViewData["Title"] = "Display Order";
+}
+
+@if (Model.Order is null)
+{
+    <h1>The Order Was Not Found</h1>
+}
+else
+{
+    <h1>Order Details</h1>
+
+    <table class="table">
+    <caption class="visually-hidden">Order Details</caption>
+    <tbody>
+        <tr>
+            <th scope="row"><strong>Ordered By</strong></th>
+            <td>@Model.Order.OrderedBy</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong> Ordered On</strong></th>
+            <td><time datetime="@Model.Order.Date.ToString("s")">@Model.Order.Date</time></td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Meal</strong></th>
+            <td>@Model.Food.Title</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Price</strong></th>
+            <td>@Model.Food.Price.ToString("C")</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Quantity</strong></th>
+            <td>@Model.Order.Quantity</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Total</strong></th>
+            <td>@Model.Order.Total.ToString("C")</td>
+        </tr>
+        <tr>
+            <td colspan="2"><a asp-page="./Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Order</a></td>
+        </tr>
+    </tbody>
+</table>
+
+    <form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input asp-for="UpdatedOrder.Id" value="@Model.Id" hidden>
+    <div>
+        <label asp-for="UpdatedOrder.NewName" class="form-label">Ordered By</label>
+        <input asp-for="UpdatedOrder.NewName" value="@Model.Order.OrderedBy" class="form-control">
+        <span asp-validation-for="UpdatedOrder.NewName" class="text-danger val-msg"></span>
+    </div>
+    <div>
+        <input type="submit" value="Update Client" class="btn btn-primary">
+    </div>
+</form>
+
+}

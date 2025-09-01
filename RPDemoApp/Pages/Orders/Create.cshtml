@@ -1,0 +1,39 @@
+﻿@page
+@model RPDemoApp.Pages.Orders.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create an Order</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div>
+        <label asp-for="Order.FoodId" class="form-label"></label>
+        <select asp-for="Order.FoodId" asp-items="Model.Items" class="form-control">
+            <option hidden disabled selected>Select a meal</option>
+        </select>
+        <span asp-validation-for="Order.FoodId" class="text-danger val-msg"></span>
+    </div>
+
+    <div>
+        <label asp-for="Order.Quantity" class="form-label"></label>
+        <input asp-for="Order.Quantity" class="form-control"/>
+        <span asp-validation-for="Order.Quantity" class="text-danger val-msg"></span>
+    </div>
+
+    <div>
+        <label asp-for="Order.OrderedBy" class="form-label"></label>
+        <input asp-for="Order.OrderedBy" class="form-control" />
+        <span asp-validation-for="Order.OrderedBy" class="text-danger val-msg"></span>
+    </div>
+
+    <div class="mb-3">
+        <input type="submit" value="Create Order" class="btn btn-primary mt-2"/>
+    </div>
+</form>
+
+@section scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

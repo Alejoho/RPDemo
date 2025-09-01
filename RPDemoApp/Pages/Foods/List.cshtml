@@ -1,0 +1,28 @@
+﻿@page
+@model RPDemoApp.Pages.Foods.ListModel
+@{
+    ViewData["Title"] = "Food List";
+}
+
+<h1>Food List</h1>
+
+<table class="table table-striped">
+    <caption class="visually-hidden">List of available food items with prices</caption>
+    <thead class="bg-dark text-white">
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var food in Model.FoodList)
+        {
+            <tr>
+                <td>@food.Title</td>
+                <td>@food.Description</td>
+                <td>@String.Format("{0:C}", food.Price)</td>
+            </tr>
+        }
+    </tbody>
+</table>
